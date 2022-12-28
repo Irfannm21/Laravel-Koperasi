@@ -15,13 +15,17 @@ class AnggotaTableSeeder extends Seeder
                 } else {
                     $result_bag = $faker->randomElements(["Pengupahan","Sopir","Absensi","Perijinan"]);
                 }
-                Anggota::create([
-                    "kode" => $faker->numerify("KA####"),
-                    "nama" => $faker->name,
-                    "departemen" => $result_dep[0],
-                    "bagian"    => $result_bag[0],
-                    "simpanan_wajib" => $faker->randomNumber(7)
-                ]);
+                $kode = $faker->numerify("KA####");
+                if($kode == Anggota::select('kode')->where('kode',$kode)->first()) {
+                    return skip();
+                } else {
+                    Anggota::create([
+                        "kode" => $faker->numerify("KA####"),
+                        "nama" => $faker->name,
+                        "departemen" => $result_dep[0],
+                        "bagian"    => $result_bag[0]
+                    ]);
+                }
             }
     }
 }
