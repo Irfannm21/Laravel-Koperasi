@@ -12,13 +12,13 @@ class PinjamanUspTableSeeder extends Seeder
      */
     public function run()
     {
-        $anggota = Anggota::find(1);
+        $anggota = Anggota::find(2);
 
         $usp = new PinjamanUsp;
-        $usp->tanggal = '2022-12-01';
-        $usp->jumlah = 10000000;
-        $usp->tenor = 18;
-        $usp->cicilan = 816000;
+        $usp->tanggal = '2022-10-01';
+        $usp->jumlah = 1000000;
+        $usp->tenor = 3;
+        $usp->cicilan = 312000;
 
         $anggota->pinjaman_usps()->save($usp);
     }

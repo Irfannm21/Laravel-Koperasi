@@ -14,12 +14,16 @@ class PembayaranTableSeeder extends Seeder
      */
     public function run()
     {
-        $usp = PinjamanEmergensi::find(1);
+        $usp = PinjamanUsp::all();
 
+        // Jika Tenor - cicilan = 0 gagalkan perintah !
+        foreach($usp as $i => $val) {
+
+        }
         $usp->pembayarans()->createMany([
             [
-                "tanggal" => '2022-03-01',
-                "jumlah"  => 816000,
+                "tanggal" => '2023-01-01',
+                "jumlah"  => 312000,
             ]
             ]);
     }

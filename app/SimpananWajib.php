@@ -9,6 +9,6 @@ class SimpananWajib extends Model
     protected $guarded = [];
 
     public function anggota() {
-        return $this->belongsTo('App\SimpananWajib');
+        return $this->belongsTo('App\Anggota');
     }
 }

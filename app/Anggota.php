@@ -24,4 +24,8 @@ class Anggota extends Model
     {
         return $this->hasMany('App\PinjamanKonsumsi');
     }
+
+    public function pembayarans(){
+        return $this->morphMany('App\Pembayaran','pembayaranable');
+    }
 }
