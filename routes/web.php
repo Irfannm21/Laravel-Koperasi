@@ -6,26 +6,41 @@ use App\Anggota;
 use App\SimpananWajib;
 use App\PinjamanUsp;
 use App\Pembayaran;
+use App\PinjamanKonsumsi;
 
 Route::get('/pembayaran', function() {
-    $results = PinjamanUsp::has('pembayarans')->get();
-    // dd($results);
-    echo "<h2>Daftar Peminjam USP</h2><hr>";
-    foreach($results as $item){
-        $tenor = $item->tenor;
-        $cicilan_masuk = $item->pembayarans->count();
-        $sisa = ($tenor - $cicilan_masuk);
-        echo "Nama = " . $item->anggota->nama;
-        echo "<br> Tenor Usp = " . $item->tenor;
-        echo "<br> Cicilan Masuk = " .$item->pembayarans->count();
-        if($tenor - $cicilan_masuk == 0) {
-            echo "<br> Sisa cicilan = LUNAS !";
-        } else {
-            echo "<br> Sisa Cicilan = " . $sisa;
-        }
-        echo "<hr>";
+    // $results = PinjamanUsp::has('pembayarans')->get();
+    // // dd($results);
+    // echo "<h2>Daftar Peminjam USP</h2><hr>";
+    // foreach($results as $item){
+    //     $tenor = $item->tenor;
+    //     $cicilan_masuk = $item->pembayarans->count();
+    //     $sisa = ($tenor - $cicilan_masuk);
 
-    }
+    //     if($tenor - $cicilan_masuk == 0) {
+    //         continue;
+    //     } else {
+    //         echo "Nama = " . $item->anggota->nama;
+    //     echo "<br> Tenor Usp = " . $item->tenor;
+    //     echo "<br> Cicilan Masuk = " .$item->pembayarans->count();
+    //     }
+    //     echo "<hr>";
+
+    $konsumsi = PinjamanKonsumsi::where('anggota_id',1)->get();
+    $total_bayar = 900;
+    $kembalian = $total_bayar;
+    foreach($konsumsi as $val) {
+             if($kembalian >= $val->jumlah) {
+                $bayar = $val->jumlah - $kembalian;
+                   echo "Kembalian lebih besar <br>";
+                   continue;
+             } else {
+                $bayar = $val->jumlah - $kembalian;
+                $kembalian = 0;
+                echo "kembalian lebih kecil";
+             }
+        }
+
 });
 
 Route::get('/all', function () {

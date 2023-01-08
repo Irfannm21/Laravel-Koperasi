@@ -16,8 +16,8 @@ class PinjamanKonsumsiTableSeeder extends Seeder
         $anggota = Anggota::find(1);
 
         $ko = new PinjamanKonsumsi;
-        $ko->tanggal = '2022-01-10';
-        $ko->jumlah = 243000;
+        $ko->tanggal = '2022-02-10';
+        $ko->jumlah = 300;
 
         $anggota->pinjaman_konsumsis()->save($ko);
     }

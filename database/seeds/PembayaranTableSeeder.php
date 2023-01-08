@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\PinjamanUsp;
 use App\PinjamanEmergensi;
 use App\Pembayaran;
+use App\PinjamanKonsumsi;
 
 class PembayaranTableSeeder extends Seeder
 {
@@ -14,17 +15,51 @@ class PembayaranTableSeeder extends Seeder
      */
     public function run()
     {
-        $usp = PinjamanUsp::all();
+        // $usp = PinjamanUsp::all();
+        // // Jika Tenor - cicilan = 0 gagalkan perintah !
+        // foreach($usp as $val) {
+        //     $tenor = $val->tenor;
+        //     $cicilan_masuk = $val->pembayarans->count();
+        //     $sisa = ($tenor - $cicilan_masuk);
+        //     if($sisa == 0) {
+        //         continue;
+        //     } else {
+        //         $val->pembayarans()->createMany([
+        //             [
+        //                 "tanggal" => '2023-02-01',
+        //                 "jumlah"  => 312000,
+        //             ]
+        //             ]);
+        //     }
+        // }
 
-        // Jika Tenor - cicilan = 0 gagalkan perintah !
-        foreach($usp as $i => $val) {
+// hitung jumlah yang sudah dibayar
 
-        }
-        $usp->pembayarans()->createMany([
-            [
-                "tanggal" => '2023-01-01',
-                "jumlah"  => 312000,
-            ]
-            ]);
+// lalu bayar
+
+        $konsumsi = PinjamanKonsumsi::where('anggota_id',1)->get();
+            $total_bayar = 900;
+            $kembalian = $total_bayar;
+            foreach($konsumsi as $val) {
+                     if($kembalian >= $val->jumlah) {
+                        $bayar = $val->jumlah;
+                            $val->pembayarans()->createMany([
+                               [
+                                'tanggal' => '2022-11-11',
+                                "jumlah" => $bayar,
+                               ]
+                            ]);
+                     } else {
+                        // $bayar = $val->jumlah - $kembalian;
+                        // $kembalian = 0;
+                        $val->pembayarans()->createMany([
+                            [
+                             'tanggal' => '2022-11-11',
+                             "jumlah" => $val->jumlah,
+                            ]
+                         ]);
+                         return;
+                     }
+                }
     }
 }
