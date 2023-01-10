@@ -1,3 +1,12 @@
+@php
+    // dd($anggota->departemen);
+    if(isset($anggota->departemen)=="Weaving"){
+        echo $anggota->nama . " | " . $anggota->departemen;
+    } else {
+        echo "Salah";
+    }
+    die();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +24,7 @@
                 <hr>
                 <form action="{{route("anggota-koperasi.update",$anggota->id)}}">
                     @method('put')
-                    @include('koperasi.anggota.form');
+                    @include('koperasi.anggota.form')
                 </form>
             </div>
         </div>
