@@ -38,24 +38,23 @@ class PembayaranTableSeeder extends Seeder
 // lalu bayar
 
         $konsumsi = PinjamanKonsumsi::where('anggota_id',1)->get();
-            $total_bayar = 900;
+            $total_bayar = 1100;
             $kembalian = $total_bayar;
             foreach($konsumsi as $val) {
                      if($kembalian >= $val->jumlah) {
-                        $bayar = $val->jumlah;
+                        $kembalian = $kembalian - $val->jumlah;
                             $val->pembayarans()->createMany([
                                [
                                 'tanggal' => '2022-11-11',
-                                "jumlah" => $bayar,
+                                "jumlah" => $val->jumlah,
                                ]
                             ]);
+                            continue;
                      } else {
-                        // $bayar = $val->jumlah - $kembalian;
-                        // $kembalian = 0;
                         $val->pembayarans()->createMany([
                             [
                              'tanggal' => '2022-11-11',
-                             "jumlah" => $val->jumlah,
+                             "jumlah" => $kembalian,
                             ]
                          ]);
                          return;

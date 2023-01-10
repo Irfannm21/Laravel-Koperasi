@@ -8,6 +8,14 @@ use App\PinjamanUsp;
 use App\Pembayaran;
 use App\PinjamanKonsumsi;
 
+
+Route::get('/', function() {
+    return view('welcome');
+});
+
+Route::resource('/anggota-koperasi', 'AnggotaController');
+
+
 Route::get('/pembayaran', function() {
     // $results = PinjamanUsp::has('pembayarans')->get();
     // // dd($results);
