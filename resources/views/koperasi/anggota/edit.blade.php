@@ -1,12 +1,16 @@
-@php
-    // dd($anggota->departemen);
-    if(isset($anggota->departemen)=="Weaving"){
-        echo $anggota->nama . " | " . $anggota->departemen;
+{{-- @php
+    dump(isset($anggota) ? $anggota->departemen : '');
+    dump($anggota->departemen);
+    die();
+    if( $anggota->departemen == "Engineering") {
+        echo "Ini Engineering";
+    } elseif ($anggota->departemen == "Weaving") {
+        echo "Ini Weaving";
     } else {
-        echo "Salah";
+        echo "Tidak pilih apa-apa";
     }
     die();
-@endphp
+@endphp --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
